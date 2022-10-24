@@ -11,9 +11,17 @@
       <th>introduction</th>
       <th><%= user.introduction %></th>
     </tr>
+     <tr>
+      <th>follows</th>
+      <th>0</th>
+    </tr>
+     <tr>
+      <th>followers</th>
+      <th>0</th>
+    </tr>
   </tbody>
 </table>
-
+ <%= link_to 'フォローする', edit_user_path(user), class: 'btn btn-primary' %>
   <div class="row">
     <%= link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do %>
       <i class="fas fa-user-cog"></i>

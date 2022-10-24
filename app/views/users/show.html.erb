@@ -6,22 +6,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= render 'list', user: @user %>
-
-          <h2 class="mt-3">New book</h2>
-          <%= form_with model: @book_new do |f| %>
-            <div class="form-group">
-              <label for="book_title">Title</label>
-              <%= f.text_field :title, class: 'form-control' %>
-            </div>
-            <div class="form-group">
-              <label for="book_opinion">Opinion</label>
-              <%= f.text_area :body, class: 'form-control' %>
-            </div>
-
-            <div class="form-group">
-              <%= f.submit 'Create Book', class: 'btn btn-success' %>
-            </div>
-          <% end %>
+          <%= render 'books/form', book: @book %>
         </div>
 
         <div class="col-md-8 offset-md-1">
