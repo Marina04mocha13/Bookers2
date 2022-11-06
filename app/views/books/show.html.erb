@@ -8,7 +8,7 @@
 <div class="container px-5 px-sm-0">
    <div class="row">
      <div class="col-md-3">
-       <%= render 'users/list', user: @user %>
+       <%= render 'users/info', user: @user %>
        <%= render 'form', book: @book %>
       </div>
 
@@ -29,23 +29,12 @@
                 <% end %>
               </td>
               <td><%= @book_id.body %></td>
-
-              <% if @book_id.favorited_by?(current_user) %>
-                <td>
-                  <%= link_to book_favorites_path(@book_id), method: :delete do %>
-                    <i class="fas fa-heart"></i><%= @book_id.favorites.count %>
-                  <% end %>
-                </td>
-              <% else %>
-                <td>
-                  <%= link_to book_favorites_path(@book_id), method: :post do %>
-                    <i class="fas fa-heart"></i><%= @book_id.favorites.count %>
-                  <% end %>
-                </td>
+              <td id="favorite_buttons_<%= @book_id.id %>">
+                <%= render "favorites/favorite", book: @book_id %>
+              </td>
                 <td>
                   コメント数: <%= @book_id.book_comments.count %>
                 </td>
-              <% end %>
 
               <% if @book_id.user == current_user %>
                 <td>

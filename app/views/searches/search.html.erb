@@ -1,5 +1,5 @@
 <% if @range == "User" %>
-  <h2>Users search for &quot;@word&quot;</h2>
+  <h2>Users search for &quot;<%= @word %>&quot;</h2>
 
   <table class="table table-hover table-inverse">
     <thead>
@@ -28,7 +28,7 @@
     </tbody>
   </table>
 <% else %>
-  <h2>Books search for &quot;@word&quot;</h2>
+  <h2>Books search for &quot;<%= @word %>&quot;</h2>
 
   <table class="table table-hover table-inverse">
     <thead>
