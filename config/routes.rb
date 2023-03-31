@@ -8,13 +8,13 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :create, :show, :edit, :update] do
-    resources :relationships, only: [:create, :destroy]
+    resource :relationships, only: [:create, :destroy]
     member do
       get :following, :followers
     end
 
   end
-  
+
   get "search" => "searches#search"
 
   get "home/about"=> "homes#about", as: "about"

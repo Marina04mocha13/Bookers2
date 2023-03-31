@@ -32,7 +32,7 @@
 <div class="row" id="follow_buttons_<%= user.id %>">
   <%= render "relationships/relationship", user: user %>
 </div>
-<% if user =raiil= current_user %>
+<% if user = current_user %>
     <div class="row">
         <%= link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do %>
           <i class="fas fa-user-cog"></i>

@@ -74,7 +74,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.hosts << "b2be762c2f414fb6be61f8cc15d4961d.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "bf487ca6a41243acaa559edeeb8b169a.vfs.cloud9.ap-northeast-1.amazonaws.com"
   config.active_job.queue_adapter = :inline
 
   config.web_console.whitelisted_ips = '106.168.62.15'
