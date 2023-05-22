@@ -1,73 +1,71 @@
-
 <% if flash[:notice] %>
- <p id="notice">
-   <%= flash[:notice] %>
- </p>
+  <p id="notice">
+     <%= flash[:notice] %>
+  </p>
 <% end %>
 
 <div class="container px-5 px-sm-0">
-   <div class="row">
-     <div class="col-md-3">
-       <%= render 'users/info', user: @user %>
-       <%= render 'form', book: @book %>
-      </div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/info', user: @user %>
+      <%= render 'form', book: @book %>
+    </div>
 
-      <div class="col-md-8 offset-md-1">
-        <h2>Book detail</h2>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>
-                <%= link_to user_path(@user.id) do %>
-                  <%= image_tag @book_id.user.get_profile_image(80,80) %>
-                  <br> <%= @user.name %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to book_path(@book_id) do %>
-                  <%= @book_id.title %>
-                <% end %>
-              </td>
-              <td><%= @book_id.body %></td>
-              <td id="favorite_buttons_<%= @book_id.id %>">
-                <%= render "favorites/favorite", book: @book_id %>
-              </td>
-                <td>
-                  <div id="comments_count">
-                    <%= render "comments_count", book: @book_id %>
-                  </div>
-                </td>
-
-              <% if @book_id.user == current_user %>
-                <td>
-                  <%= link_to edit_book_path(@book_id), class: 'btn btn-sm btn-success' do %>
-                  Edit
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to book_path(@book_id), method: :delete, class: 'btn btn-sm btn-danger' do %>
-                  Destroy
-                  <% end %>
-                </td>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= image_tag @book_id.user.get_profile_image(80,80) %>
+                <br> <%= @user.name %>
               <% end %>
-            </tr>
-          </tbody>
-        </table>
+            </td>
+            <td>
+              <%= link_to book_path(@book_id) do %>
+                <%= @book_id.title %>
+              <% end %>
+            </td>
+            <td><%= @book_id.body %></td>
+            <td id="favorite_buttons_<%= @book_id.id %>">
+              <%= render "favorites/favorite", book: @book_id %>
+            </td>
+            <td>
+              <div id="comments_count">
+                <%= render "comments_count", book: @book_id %>
+              </div>
+            </td>
 
-        <div id="comments">
-          <%= render "comment", book: @book_id %>
-        </div>
+            <% if @book_id.user == current_user %>
+              <td>
+                <%= link_to edit_book_path(@book_id), class: 'btn btn-sm btn-success' do %>
+                  Edit
+                <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(@book_id), method: :delete, class: 'btn btn-sm btn-danger' do %>
+                  Destroy
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
 
-        <%= form_with(model: [@book_id, @book_comment], local: false) do |f| %>
-          <div class="form-group">
-            <%= f.text_area :comment, rows: '5', class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.submit "送信" %>
-          </div>
-        <% end %>
-
+      <div id="comments">
+        <%= render "comment", book: @book_id %>
       </div>
 
+      <%= form_with(model: [@book_id, @book_comment], local: false) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, rows: '5', class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "送信" %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
 </div>

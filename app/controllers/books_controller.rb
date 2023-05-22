@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def create
     @book = Book.new(book_params)
@@ -12,7 +13,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorites).sort {|x, y| y.favorites.count <=> x.favorites.count}
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+      sort {|a,b|
+        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
+        a.favorited_users.includes(:favorites).where(created_at: from...to).size
+      }
     @book = Book.new
   end
 
@@ -25,12 +32,12 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    @user = @book.user
-    if @user == current_user
-      render "edit"
-    else
-      redirect_to books_path
-    end
+    # @user = @book.user
+    # if @user == current_user
+    #   render "edit"
+    # else
+    #   redirect_to books_path
+    # end
   end
 
   def update
@@ -52,6 +59,13 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def is_matching_login_user
+    user = Book.find(params[:id]).user
+    unless user.id == current_user.id
+      redirect_to books_path
+    end
   end
 
 end
