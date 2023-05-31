@@ -36,6 +36,7 @@
                 <%= render "comments_count", book: @book_id %>
               </div>
             </td>
+            <td>閲覧数: <%= @book_id.view_counts.count %></td>
 
             <% if @book_id.user == current_user %>
               <td>

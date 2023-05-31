@@ -16,6 +16,12 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
+
+  has_many :view_counts, dependent: :destroy
+
   has_one_attached :profile_image
 
   validates :name, uniqueness: true, length: { minimum: 2, maximum: 20 }
@@ -39,6 +45,10 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def mutual_following?(current_user, user)
+    current_user.following?(user) && user.following?(current_user)
   end
 
   def self.looks(search, word)

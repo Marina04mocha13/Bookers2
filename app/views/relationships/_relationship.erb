@@ -1,7 +1,12 @@
 <% if current_user != user %>
-    <% if current_user.following?(user) %>
-        <%= link_to 'フォロー外す', user_relationships_path(user.id), method: :delete, class: 'btn btn-primary', remote: true %>
-    <% else %>
-        <%= link_to 'フォローする', user_relationships_path(user.id), method: :post, class: 'btn btn-success', remote: true %>
-    <% end %>
+  <% if current_user.following?(user) %>
+    <%= link_to 'フォロー外す', user_relationships_path(user.id), method: :delete, class: 'btn btn-primary', remote: true %>
+      <% if current_user.mutual_following?(current_user, user) %>
+        <%= link_to chat_path(user.id), class: "ml-3" do %>
+          chatを始める<i class="far fa-comments"></i>
+        <% end %>
+      <% end %>
+  <% else %>
+      <%= link_to 'フォローする', user_relationships_path(user.id), method: :post, class: 'btn btn-success', remote: true %>
+  <% end %>
 <% end %>
