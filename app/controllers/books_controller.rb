@@ -28,16 +28,12 @@ class BooksController < ApplicationController
     @book = Book.new
     @user = @book_id.user
     @book_comment = BookComment.new
+
+    current_user.view_counts.create(book_id: @book_id.id)
   end
 
   def edit
     @book = Book.find(params[:id])
-    # @user = @book.user
-    # if @user == current_user
-    #   render "edit"
-    # else
-    #   redirect_to books_path
-    # end
   end
 
   def update
