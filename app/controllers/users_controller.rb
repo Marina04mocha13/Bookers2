@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+
+    @today = @books.created_today
+    @yesterday = @books.created_yesterday
+
+    @this_week = @books.created_this_week
+    @last_week = @books.created_last_week
   end
 
   def edit
@@ -48,6 +54,17 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     @users = user.followers
     render "followers"
+  end
+
+  def search
+    @user = User.find(params[:user_id])
+    @books = @user.books
+    if params[:created_at] == ""
+      @search_book = "日付を選択してください"
+    else
+      create_at = params[:created_at]
+      @search_book = @books.where(['created_at LIKE ? ', "#{create_at}%"]).count
+    end
   end
 
   private

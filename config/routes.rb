@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :create, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
+    get "search" => "users#search"
     member do
       get :following, :followers
     end
