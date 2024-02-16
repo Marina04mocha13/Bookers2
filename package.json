@@ -1,6 +1,7 @@
 {
   "name": "bookers2",
   "private": true,
+  "license": "UNLICENSED",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.4",
     "@rails/actioncable": "^6.0.0",
